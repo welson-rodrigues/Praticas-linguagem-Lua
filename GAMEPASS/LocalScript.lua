@@ -4,8 +4,8 @@ local player              = Players.LocalPlayer
 
 -- IDs das Gamepasses
 local gamepassIDs = {
-    M60 = 1226110219,
-    PC = 1227792745
+    M60 = 1235092283,
+    PC = 1235042314
 }
 
 local screenGui = script.Parent
