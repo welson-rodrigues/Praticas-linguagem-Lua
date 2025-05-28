@@ -4,8 +4,8 @@ local player              = Players.LocalPlayer
 
 -- IDs das Gamepasses
 local gamepassIDs = {
-    Shotgun = 1226110219,
-    Machete = 1227792745
+    M60 = 1226110219,
+    PC = 1227792745
 }
 
 local screenGui = script.Parent
@@ -34,7 +34,7 @@ menuSecundario.Parent           = screenGui
 Instance.new("UICorner", menuSecundario).CornerRadius = UDim.new(0, 12)
 
 -- Criar botões de arma
-local armas = {"Shotgun", "Machete"}
+local armas = {"M60", "PC"}
 local botoes = {}
 
 for i, nome in ipairs(armas) do

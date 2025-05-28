@@ -4,8 +4,8 @@ local ServerStorage      = game:GetService("ServerStorage")
 
 -- IDs das Gamepasses
 local gamepassIDs = {
-    Shotgun = 1226110219,
-    Machete = 1227792745
+    M60 = 1226110219,
+    PC = 1227792745
 }
 
 -- Clona e entrega a ferramenta ao Backpack
