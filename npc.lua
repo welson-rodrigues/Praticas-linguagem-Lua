@@ -1,62 +1,31 @@
-local CurrentPart = nil
-local MaxInc = 200
+-- Script Animate padrão para NPC R6
+local animateScript = script
+local humanoid = animateScript.Parent:WaitForChild("Humanoid")
 
-function onTouched(hit)
-    if hit.Parent == nil then
-        return
-    end
-    
-    local humanoid = hit.Parent:findFirstChild("Humanoid")
-    
-    if humanoid == nil then
-        CurrentPart = hit
-    end
+local function loadAnim(name, id)
+    local anim = Instance.new("Animation")
+    anim.Name = name
+    anim.AnimationId = "rbxassetid://" .. id
+    return humanoid:LoadAnimation(anim)
 end
 
-function waitForChild(parent, childName)
-    local child = parent:findFirstChild(childName)
-    
-    if child then
-        return child
-    end
-    
-    while true do
-        print(childName)
-        
-        child = parent.ChildAdded:wait()
-        
-        if child.Name==childName then
-            return child
+local walkAnim = loadAnim("WalkAnim", 180426354) -- animação de andar R6
+local jumpAnim = loadAnim("JumpAnim", 128777973)  -- animação de pulo R6
+
+-- Ativar animação de andar
+humanoid.Running:Connect(function(speed)
+    if speed > 0 then
+        if not walkAnim.IsPlaying then
+            walkAnim:Play()
         end
+    else
+        walkAnim:Stop()
     end
-end
+end)
 
-local Figure = script.Parent
-local Humanoid = waitForChild(Figure, "Humanoid")
-local Torso = waitForChild(Figure, "Torso")
-local Left = waitForChild(Figure, "Left Leg")
-local Right = waitForChild(Figure, "Right Leg")
-
-Humanoid.Jump = true
-
-Left.Touched:connect(onTouched)
-Right.Touched:connect(onTouched)
-
-while true do
-    wait(math.random(2, 10))
-    
-    if CurrentPart ~= nil then
-        -- if math.random(1, 2) == 1 then
-        -- Humanoid.Jump = true
-        --  end
-        
-        Humanoid:MoveTo(Torso.Position + Vector3.new(math.random(-MaxInc, MaxInc), 0, math.random(-MaxInc, MaxInc)), CurrentPart)
-    end
-end
-
-
-
-
-
+-- Ativar animação de pulo
+humanoid.Jumping:Connect(function()
+    jumpAnim:Play()
+end)
 
 
